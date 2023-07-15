@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .profile-header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+        }
+
+        .profile-header h1 {
+            margin: 0;
+        }
+
+        .profile-info {
+            padding: 20px;
+        }
+
+        .profile-info h2 {
+            margin-top: 0;
+        }
+
+        .profile-info p {
+            margin: 0;
+        }
+
+        .video-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .video-card {
+            border: 1px solid #ddd;
+            padding: 10px;
+        }
+
+        .video-card img {
+            width: 30%;
+            height: auto;
+        }
+
+        .video-card h3 {
+            margin-top: 10px;
+            margin-bottom: 5px;
+        }
+
+        .video-card p {
+            color: #888;
+            margin: 0;
+        }
+        .profile-info {
+            text-align: center;
+        }
+
+        .user-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 20px;
+        }
+
+        .user-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-info h2 {
+            margin-top: 0;
+        }
+
+        .profile-info p {
+            margin: 0;
+        }
+
+        @media (max-width: 768px) {
+            .video-list {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-header">
+        <h1>User Profile</h1>
+    </div>
+
+    <div class="profile-info">
+        <div class="user-image"><img src="./assets/user.png" alt=""></div>
+        <h2>Basic Information</h2>
+        <p>Name: SuperSimpleDev</p>
+        <p>Email: simon@supersimple.dev</p>
+    </div>
+
+
+    <div class="video-card">
+        <h2>Video uploaded by user</h2>
+        <a href="video-player1.html?id=video1" style="text-decoration: none; color:black">
+            <!-- https://www.youtube.com/embed/G3e-cpL7ofc?autoplay=1&mute=1 -->
+            <img src="./assets/thumbnail1.jpg" alt="Video 1 Thumbnail">
+            <div class="video-title">HTML-CSS Full Course</div>
+            <div class="video-duration">Duration: 6:31:23</div>
+        </a>
+    </div>
+
+    <!-- <div class="video-list">
+        <div class="video-card">
+            <a href="video-player.html?id=video1">
+                <img src="thumbnail1.jpg" alt="Video 1 Thumbnail">
+                <h3>Video 1</h3>
+                <p>Duration: 10:30</p>
+            </a>
+        </div>
+        <div class="video-card">
+            <a href="video-player.html?id=video2">
+                <img src="thumbnail2.jpg" alt="Video 2 Thumbnail">
+                <h3>Video 2</h3>
+                <p>Duration: 15:45</p>
+            </a>
+        </div> -->
+        <!-- Add more video cards as needed -->
+    </div>
+</body>
+</html>

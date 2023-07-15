@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload Video</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .container h2 {
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            transition: border-color 0.3s ease;
+        }
+
+        .input-group input:focus {
+            border-color: #333;
+            outline: none;
+        }
+
+        .upload-btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .upload-btn:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Upload Video</h2>
+        <div class="input-group">
+            <label for="video-file">Select a video file:</label>
+            <input type="file" id="video-file" accept="video/*" required>
+        </div>
+
+        <div class="input-group">
+            <label for="video-title">Title:</label>
+            <input type="text" id="video-title" required>
+        </div>
+
+        <div class="input-group">
+            <label for="video-description">Description:</label>
+            <input type="text" id="video-description" required>
+        </div>
+
+        <div class="input-group">
+            <label for="video-duration">Duration (HH:MM:SS):</label>
+            <input type="text" id="video-duration" required>
+        </div>
+
+        <input type="submit" value="Upload" class="upload-btn">
+    </div>
+
+    <script>
+        document.getElementById("video-upload-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+            var fileInput = document.getElementById("video-file");
+            var titleInput = document.getElementById("video-title");
+            var descriptionInput = document.getElementById("video-description");
+            var durationInput = document.getElementById("video-duration");
+
+            if (fileInput.files.length > 0 && titleInput.value.trim() !== "" && descriptionInput.value.trim() !== "" && durationInput.value.trim() !== "") {
+                var file = fileInput.files[0];
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    var videoData = {
+                        id: generateUniqueId(),
+                        title: titleInput.value.trim(),
+                        description: descriptionInput.value.trim(),
+                        duration: durationInput.value.trim(),
+                        videoUrl: e.target.result
+                    };
+
+                    saveVideo(videoData);
+                    resetForm();
+                    alert("Video uploaded successfully!");
+                };
+
+                reader.readAsDataURL(file);
+            } else {
+                alert("Please fill in all the required fields.");
+            }
+        });
+
+        function generateUniqueId() {
+            // Generate a unique ID for each video (You can use your own method here)
+            return "video-" + Math.random().toString(36).substr(2, 9);
+        }
+
+        function saveVideo(videoData) {
+            // Save the video data to localStorage or send it to a server (You can modify this function based on your backend setup)
+            var videos = JSON.parse(localStorage.getItem("uploadedVideos")) || [];
+            videos.push(videoData);
+            localStorage.setItem("uploadedVideos", JSON.stringify(videos));
+        }
+
+        function resetForm() {
+            document.getElementById("video-file").value = "";
+            document.getElementById("video-title").value = "";
+            document.getElementById("video-description").value = "";
+            document.getElementById("video-duration").value = "";
+        }
+    </script>
+</body>
+</html>

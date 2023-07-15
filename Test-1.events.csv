@@ -1,0 +1,6 @@
+_id,eventType,timestamp,userId,additionalData.pageUrl,additionalData.browser,additionalData.duration,additionalData.source
+64b229729a8449dd65121170,click,Sat Jul 15 2023 10:36:58 GMT+0530 (India Standard Time),abc123,https://example.com,Chrome,1500,advertising
+615da3124764eaf95f793da8,click,2023-07-15T10:30:00.000Z,abc123,https://example.com,Firefox,1200,web-surfing
+615da3124764eaf95f793da9,login,2023-07-15T11:15:00.000Z,xyz789,https://example.com,Edge,,web-surfing
+615da3124764eaf95f793daa,view,2023-07-15T14:20:00.000Z,def456,https://example.com/product123,Chrome,2500,referral
+615da3124764eaf95f793dab,click,2023-07-15T13:45:00.000Z,xyz123,https://example.com/product456,Safari,800,search

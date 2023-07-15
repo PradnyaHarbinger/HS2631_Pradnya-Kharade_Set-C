@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Website</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        nav ul li {
+            margin-right: 10px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            padding: 5px;
+        }
+
+        .content {
+            padding: 20px;
+        }
+
+        .video {
+            display: inline-block;
+            margin-right: 20px;
+            margin-bottom: 20px;
+            width: 500px;
+            height: 500px;
+        }
+
+        .video img {
+            align-items: center;
+            width: 400px;
+            height: 250px;
+        }
+
+        .video-title {
+            font-weight: bold;
+            margin-top: 5px;
+        }
+
+        .video-description {
+            color: #888;
+            margin-bottom: 10px;
+        }
+
+        .video-duration {
+            color: #888;
+        }
+
+        iframe {
+            width: 560px;
+            height: 315px;
+        }
+
+        @media (max-width: 768px) {
+            iframe {
+                width: 100%;
+                height: 250px;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            nav ul li {
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="#">My Video APP</a></li>
+        </ul>
+        <ul>
+            <li>
+                <form id="search-form">
+                    <input type="text" id="search-input" placeholder="Search videos...">
+                    <input type="submit" value="Search">
+                </form>
+            </li>
+            <li><a href="login.html">Login</a></li>
+            <li><a href="registration.html">Signup</a></li>
+            <li><a href="upload-video.html">Upload Video</a></li>
+        </ul>
+    </nav>
+
+    <div class="content">
+        <div class="video">
+            <a href="video-player1.html?id=video1" style="text-decoration: none; color:black">
+                <!-- https://www.youtube.com/embed/G3e-cpL7ofc?autoplay=1&mute=1 -->
+                <img src="./assets/thumbnail1.jpg" alt="Video 1 Thumbnail">
+                <div class="video-title">HTML-CSS Full Course</div>
+                <div class="video-description">This video provides a comprehensive course on HTML and CSS.</div>
+                <div class="video-duration">Duration: 6:31:23</div>
+            </a>
+        </div>
+        <div class="video">
+            <a href="video-player2.html?id=video2" style="text-decoration: none; color:black">
+                <img src="./assets/thumbnail2.jpg" alt="Video 2 Thumbnail">
+                <div class="video-title">See you again</div>
+                <div class="video-description">Enjoy the hit song "See you again" by Wiz Khalifa and Charlie Puth.</div>
+                <div class="video-duration">Duration: 3:58</div>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("search-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+            var keyword = document.getElementById("search-input").value;
+            performSearch(keyword);
+        });
+
+        function performSearch(keyword) {
+            var videos = [
+                { id: "video1", title: "HTML-CSS Full Course", description: "This video provides a comprehensive course on HTML and CSS.", duration: "6:31:23", thumbnail: "./assets/thumbnail1.jpg" },
+                { id: "video2", title: "See you again", description: "Enjoy the hit song 'See you again' by Wiz Khalifa and Charlie Puth.", duration: "3:58", thumbnail: "./assets/thumbnail2.jpg" }
+            ];
+
+            var searchResults = videos.filter(function(video) {
+                return video.title.toLowerCase().includes(keyword.toLowerCase()) || video.description.toLowerCase().includes(keyword.toLowerCase());
+            });
+
+            displaySearchResults(searchResults);
+        }
+
+        function displaySearchResults(results) {
+            var content = document.querySelector(".content");
+            content.innerHTML = "";
+
+            if (results.length === 0) {
+                content.innerHTML = "<p>No results found.</p>";
+            } else {
+                results.forEach(function(video) {
+                    var videoElement = document.createElement("div");
+                    videoElement.className = "video";
+
+                    var linkElement = document.createElement("a");
+                    linkElement.href = "video-player.html?id=" + video.id;
+
+                    var thumbnailElement = document.createElement("img");
+                    thumbnailElement.src = video.thumbnail;
+                    thumbnailElement.alt = video.title + " Thumbnail";
+
+                    var titleElement = document.createElement("div");
+                    titleElement.className = "video-title";
+                    titleElement.textContent = video.title;
+
+                    var descriptionElement = document.createElement("div");
+                    descriptionElement.className = "video-description";
+                    descriptionElement.textContent = video.description;
+
+                    var durationElement = document.createElement("div");
+                    durationElement.className = "video-duration";
+                    durationElement.textContent = "Duration: " + video.duration;
+
+                    linkElement.appendChild(thumbnailElement);
+                    linkElement.appendChild(titleElement);
+                    linkElement.appendChild(descriptionElement);
+                    linkElement.appendChild(durationElement);
+
+                    videoElement.appendChild(linkElement);
+                    content.appendChild(videoElement);
+                });
+            }
+        }
+    </script>
+</body>
+</html>

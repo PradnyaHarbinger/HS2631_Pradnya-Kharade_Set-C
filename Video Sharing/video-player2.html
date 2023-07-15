@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Video Player</title>
+    <style>
+        *{
+            margin:10px;
+            padding: 10px;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .video-player {
+            margin-top: 20px;
+        }
+
+        #video-iframe {
+            width: 100%;
+            height: 400px;
+        }
+
+        .video-actions {
+            margin-top: 20px;
+        }
+
+        .video-actions button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+
+        #comment-input {
+            width: 100%;
+            height: 100px;
+            margin-top: 10px;
+            resize: vertical;
+        }
+
+        #comment-btn {
+            margin-top: 10px;
+        }
+
+        #comments-section {
+            margin-top: 20px;
+        }
+
+        #comments-section h3 {
+            font-size: 20px;
+        }
+
+        #comments-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 10px 0;
+        }
+
+        #comments-list li {
+            margin-bottom: 10px;
+        }
+
+        #comments-list li strong {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="video-player">
+        <iframe id="video-iframe" src="" frameborder="0" allowfullscreen></iframe>
+    </div>
+
+    <div class="video-actions">
+        <button id="like-btn">Like</button>
+        <button id="dislike-btn">Dislike</button>
+        <textarea id="comment-input" placeholder="Leave a comment..."></textarea>
+        <button id="comment-btn">Post Comment</button>
+    </div>
+
+    <div id="comments-section">
+        <h3>Comments:</h3>
+        <ul id="comments-list"></ul>
+    </div>
+
+    <script>
+        window.onload = function() {
+            var videoId = getVideoIdFromURL();
+            loadVideo(videoId);
+            loadComments(videoId);
+
+            document.getElementById("like-btn").addEventListener("click", likeVideo);
+            document.getElementById("dislike-btn").addEventListener("click", dislikeVideo);
+            document.getElementById("comment-btn").addEventListener("click", postComment);
+        };
+
+        function getVideoIdFromURL() {
+            var urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get("id");
+        }
+
+        function loadVideo(videoId) {
+            var videoIframe = document.getElementById("video-iframe");
+            videoIframe.src = "https://www.youtube.com/embed/oXtATL9vtIs?autoplay=1&mute=1";
+           //https://www.youtube.com/watch?v=oXtATL9vtIs
+        }
+
+        function loadComments(videoId) {
+            // Simulated comments for demonstration
+            var comments = [
+                { author: "User1", content: "This video is awesome!" },
+                { author: "User2", content: "Great video, thanks for sharing!" },
+                { author: "User3", content: "I learned a lot from this video." }
+            ];
+
+            var commentsList = document.getElementById("comments-list");
+            commentsList.innerHTML = "";
+
+            comments.forEach(function(comment) {
+                var listItem = document.createElement("li");
+                listItem.innerHTML = "<strong>" + comment.author + ":</strong> " + comment.content;
+                commentsList.appendChild(listItem);
+            });
+        }
+
+        function likeVideo() {
+            // Logic to handle video liking
+        }
+
+        function dislikeVideo() {
+            // Logic to handle video disliking
+        }
+
+        function postComment() {
+            var commentInput = document.getElementById("comment-input");
+            var commentContent = commentInput.value;
+
+            if (commentContent.trim() !== "") {
+                // Logic to handle comment posting
+                var newComment = { author: "Current User", content: commentContent };
+                addCommentToList(newComment);
+                commentInput.value = "";
+            }
+        }
+
+        function addCommentToList(comment) {
+            var commentsList = document.getElementById("comments-list");
+            var listItem = document.createElement("li");
+            listItem.innerHTML = "<strong>" + comment.author + ":</strong> " + comment.content;
+            commentsList.appendChild(listItem);
+        }
+    </script>
+</body>
+</html>
